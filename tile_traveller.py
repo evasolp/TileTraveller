@@ -27,20 +27,21 @@ def direction_from_user():
 
 def is_move_valid(position, direction):
     '''Takes in the direction from user and the current position and checks if the direction is valid, and returns True or False''' 
-    result = False
+
     if direction == 'n' or direction == 'N':
         if position == 1.1 or position == 2.1 or position == 1.2 or position == 3.2:
-            result = True
-    if direction == 's' or direction == 'S':
+            return True
+    elif direction == 's' or direction == 'S':
         if position == 1.2 or position == 1.3 or position == 2.2 or position == 3.3 or position == 3.2:
-            result = True
-    if direction == 'e' or direction == 'E':
+            return True
+    elif direction == 'e' or direction == 'E':
         if position == 1.2 or position == 1.3 or position == 2.3:
-            result = True
-    if direction == 'w' or direction == 'W':
+            return True
+    elif direction == 'w' or direction == 'W':
         if position == 2.2 or position == 3.3 or position == 2.3:
-            result == True
-    return result
+            return True
+
+
 
 def move(position, direction):
     '''Takes the current tile and move direction in and returns the new tile''' 
@@ -68,7 +69,7 @@ print_valid_moves(position)
 while position != 3.1:
 
     direction = direction_from_user()
-    
+
     if is_move_valid(position, direction) == True:
 
         position = move(position, direction)
