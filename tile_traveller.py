@@ -20,14 +20,13 @@ def print_valid_moves(position):
     elif position == 3.2:
         print('You can travel: (N)orth or (S)outh.')
 
-
 def direction_from_user():
     '''Gets a N, W, E or S from the user, (depending on where the user wants/can move) and returns it '''  
     direction = input('Direction: ')
     return direction
 
 def is_move_valid(position, direction):
-    '''Takes in the direction from user and the current position and checks if the direction is valid, and returns True or None''' 
+    '''Takes in the direction from user and the current position and checks if the direction is valid, and returns True or False''' 
     result = False
     if direction == 'n' or direction == 'N':
         if position == 1.1 or position == 2.1 or position == 1.2 or position == 3.2:
@@ -43,33 +42,42 @@ def is_move_valid(position, direction):
             result == True
     return result
 
-def move():
+def move(position, direction):
     '''Takes the current tile and move direction in and returns the new tile''' 
-    #Nota að hækka/lækka um heilan eða 0.1
-    return
+    if direction == "n" or direction == "N":
+        position += 0.1
+    elif direction == "s" or direction == "S":
+        position -= 0.1
+    elif direction == "e" or direction == "E":
+        position += 1
+    elif direction == "w" or direction == "W":
+        position -= 1
+
+    #we formatted the position so it only had 1 decimal place 
+    position = float(("{:.1f}".format(position)))
+    return position
 
 
 start_position_float = 1.1
 
-
-
-
-
 position = start_position_float
 
+print_valid_moves(position)
+
+
 while position != 3.1:
-    print_valid_moves(position)
+
     direction = direction_from_user()
+    
+    if is_move_valid(position, direction) == True:
 
-    if valid_moves(direction) == True:
-        position = move()
-        #látum position og direction í move fallið
-        direction = direction_from_user()
+        position = move(position, direction)
 
+        print_valid_moves(position)
 
     else:
         print("Not a valid direction!")
-        direction = direction_from_user()
+
 
 else:
     print("Victory!")
